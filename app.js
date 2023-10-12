@@ -1,6 +1,7 @@
 // Express  framework
 const express = require ("express");
 const app = express ();
+const router = require("./router")
 
 // Mongo DB connect 
  const db = require("./server").db();
@@ -19,6 +20,7 @@ app.set ("view engine","ejs");
 
 
 //Routing codes
+app.use ("/", router);
 
 
 module.exports= app;
