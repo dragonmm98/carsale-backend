@@ -1,9 +1,12 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const http = require("http");
 const mongodb = require ("mongodb");
 
 let db;
 
-const connectionToString = "mongodb+srv://notailgg:10OJVGyPSh8cbBi0@notailgg.sfp87tq.mongodb.net/REJA?retryWrites=true&w=majority&appName=AtlasApp"
+const connectionToString = process.env.MONGO_URL;
 
 mongodb.connect (
     connectionToString,
@@ -19,7 +22,7 @@ module.exports = client;
     
 const app =require ("./app");
 const server = http.createServer(app);
-let port= 3007;
+let port= process.env.PORT || 3007;
 server.listen(port,function (){
 console.log (`The server is running successfully on port ${port},http://localhost:${port}`)
 })
