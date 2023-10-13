@@ -4,8 +4,6 @@ const app = express ();
 const router = require("./router")
 
 // Mongo DB connect 
- const db = require("./server").db();
- const mongodb= require("mongodb");
 
 // Entry codes
 app.use(express.static("public"));
