@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-const { member_type_enums, member_status_enums } = require("../lib/config");
+const { member_type_enums, member_status_enums,ordernary_enums } = require("../lib/config");
 
 const memberSchema = new mongoose.Schema ({
     mb_nick: {
@@ -54,7 +54,7 @@ const memberSchema = new mongoose.Schema ({
     mb_top:{
         type:String,
         required:false,
-        default:'N',
+        default:"N",
         enum :{
             values: ordernary_enums,
             message:"{VALUE} is not among permitted values"
@@ -81,7 +81,7 @@ const memberSchema = new mongoose.Schema ({
         default: 0
     },
       
-}, {timestamps:true})  // Mongo db adds createdAt and updatedAt);
+}, {timestamps:true});  // Mongo db adds createdAt and updatedAt);
 
 
 module.exports = mongoose.model("Member",memberSchema);
