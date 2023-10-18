@@ -2,6 +2,7 @@
 const express = require ("express");
 const app = express ();
 const router = require("./router")
+const router_bssr = require("./router_bssr");
 
 // Mongo DB connect 
 
@@ -14,7 +15,7 @@ app.use (express.urlencoded({extended:true}));
 // app.use (
 //     session({
 //         secret:process.env.SESSION_SECRET,
-//         cookies:{
+//         cookie:{
 //             maxAge: 1000*60*30,  //for 30 minutes
     
 //         },
@@ -31,6 +32,6 @@ app.set ("view engine","ejs");
 
 //Routing codes
 app.use ("/", router);
-// app.use ("/resto", router_bssr); //ananaviy yo'l
+app.use ("/resto", router_bssr); //ananaviy yo'l
 
 module.exports= app;
