@@ -1,0 +1,13 @@
+<%-include('includes/header') %>
+<body>
+    <h1>
+        My Restaurnat Page
+    </h1>
+    <%  if (!member) { %>
+        <h3>Siz login qilmagansiz</h3>
+        <% } else { %>
+            <h4>siz auth qilgansiz and your nickname is <%=member.mb_nick%></h4>
+            <% } %>
+</body>
+
+<%- include('includes/footer')  %>
