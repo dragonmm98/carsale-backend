@@ -11,8 +11,9 @@ class Product {
 
      async getAllProductsDataResto(member) {
         try {
+            
             member._id = shapeIntoMongooseObjectId(member._id);
-            const result = await this.productModel.find({
+              const result = await this.productModel.find({
                 restaurant_mb_id:member._id
             });
             assert.ok(result,Definer.general_err1);
