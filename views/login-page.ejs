@@ -1,9 +1,43 @@
-<% - include("includes/header") %>
+<%-include("includes/header")%>
+<link rel="stylesheet"  href="/css/login.css">
+
 
 <body>
-     <h1>Login Page</h1>
+     <form class="login_container" action="/resto/login" method="post">
+          <div class="login_frame">
+               <div class="login_top">
+                    <span>Enter Web side</span>
+                    <div> Enter Main Page <a href="/resto" style="color:#6440FB">Home</a></div>
+                    <p>Registration Page <a href="/resto/sign-up"  style="color:#6440FB">Registration</a></p>
+
+               </div>
+            <div class="login_input_frame">
+               <div class="login_input_container">
+                      <label>User name</label>
+                      <input 
+                      type="text"
+                      name="mb_nick" 
+                      placeholder="User name" 
+                      value="" 
+                      required>
+               </div>
+               <div class="login_input_container" >
+                    <label>Enter Your Password</label>
+                    <input 
+                    type="password" 
+                    name="mb_password" 
+                    placeholder="Password" 
+                    value="" 
+                    required>
+               </div>
+            </div>  
+            
+            <button class="login_btn" name="login" type="submit">Login</button>
+        
+          </div>
+      </form>
 </body>
 
 
 
-<% - include("includes/footer") %>
+<%- include("includes/footer") %>
