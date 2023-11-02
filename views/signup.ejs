@@ -1,9 +1,102 @@
-<% - include("includes/header") %>
+<%- include("includes/header") %>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
 
 <body>
-     <h1>Sign Up Page</h1>
-</body>
+     <form 
+     class="login_container" 
+     action="/resto/sign-up" 
+     method="post" 
+     enctype="multipart/form-data">
+   <div class="login_frame" style="width: 650px; height: 730px;">
+       <div class="login_top">
+          <span>Registration</span>
+          <div>Return to Home Page <a href="/resto" style="color: #6440fb;">Home</a>
+          </div>
+          <p>
+               Do you have existing account?
+               <a href="/resto/login" style="color:#6440FB;">Login</a>
+          </p>
+       </div>
+         
+       <div class="sign_input_frame">
+          <div class="sign_up_frame">
+               <label>User name</label>
+               <input 
+               type="text"
+               name="mb_nick"
+               placeholder="Input user name"
+               value=""
+               required
+               >
+          </div>   
+          <div class="sign_up_frame">
+               <label>Phone number</label>
+               <input 
+               type="text"
+               name="mb_phone"
+               placeholder="Phone number"
+               value=""
+               required
+               >
+          </div>   
+       </div>
+       
+       <div class="sign_input_frame">
+          <div class="sign_up_frame">
+               <label>Password</label>
+               <input 
+               type="password"
+               name="mb_password"
+               placeholder="Enter your password"
+               value=""
+               required
+               >
+          </div>   
+          <div class="sign_up_frame">
+               <label>Password confirmation</label>
+               <input 
+               type="password"
+               name="mb_confirm_password"
+               placeholder="Reenter your password"
+               value=""
+               required
+               >
+          </div>    
+       </div>
+    <div class="login_input_frame">
+       <div class="media_frame">
+        <img class="upload_image_frame" src="/images/default_resto.jpg" alt="">
+        <div class="upload_cont">
+          <span class="media_text">Picture</span>
+          <div class="filebox bs3-primary preview-image">
+               <input 
+               class="upload_name" 
+               value="choose picture" 
+               disabled="disabled"
+               >
+               <label>Upload  picture</label>
+               <input 
+               type="file"
+               id="input_file"
+               name="restaurant_img"
+               placeholder="choose the image"
+               class="upload-hidden form-control-file restaurant_img"
+               >
+               </div>
+               <p class="thumbnails">Upload your restaurant picture here <br>Picture should be in .jpg, .jpeg,
+                or .png format<br>Upload only original picture it must not include any text  </p>
+
+        </div>
+
+       </div>
+    </div>
+    <button class="login_btn" name="signup" type="submit">Register</button>
+
+     </div>
+
+   </form>
+   </body>
 
 
 
-<% - include('includes/footer') %>  
+<%- include('includes/footer') %>  
