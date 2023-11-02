@@ -2,7 +2,8 @@
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 
 <body>
-     <form 
+     <form
+     onsubmit="return validateSignUpForm()" 
      class="login_container" 
      action="/resto/sign-up" 
      method="post" 
@@ -24,6 +25,7 @@
                <input 
                type="text"
                name="mb_nick"
+               class="mb_nick"
                placeholder="Input user name"
                value=""
                required
@@ -34,6 +36,7 @@
                <input 
                type="text"
                name="mb_phone"
+               class="mb_phone"
                placeholder="Phone number"
                value=""
                required
@@ -47,6 +50,7 @@
                <input 
                type="password"
                name="mb_password"
+               class="mb_password"
                placeholder="Enter your password"
                value=""
                required
@@ -57,6 +61,7 @@
                <input 
                type="password"
                name="mb_confirm_password"
+               class="mb_confirm_password"
                placeholder="Reenter your password"
                value=""
                required
@@ -74,12 +79,11 @@
                value="choose picture" 
                disabled="disabled"
                >
-               <label>Upload  picture</label>
+               <label for="input_file">Upload  picture</label>
                <input 
                type="file"
                id="input_file"
                name="restaurant_img"
-               placeholder="choose the image"
                class="upload-hidden form-control-file restaurant_img"
                >
                </div>
@@ -94,8 +98,66 @@
 
      </div>
 
-   </form>
-   </body>
+   </form>  
+</body>
+
+<script>
+       
+       $(function() {
+          let fileTarget= $(".filebox .upload-hidden");
+          let filename ="";
+
+          fileTarget.on("change", function(){
+               if (window.FileReader) {
+                    const uploading_file = $(this)[0].files[0];
+                    const fileType =uploading_file["type"];
+                    const validImageTypes = ["image/jpg","image/jpeg","image/png"];
+                    if (!validImageTypes.includes(fileType)) {
+                         alert ('Please upload only allowed image types')
+                    } else {
+                    if (uploading_file) {
+                         console.log(URL.createObjectURL(uploading_file));
+                         $(".upload_image_frame")
+                         .attr("src", URL.createObjectURL(uploading_file))
+                         .addClass("success"); 
+                    }
+                    filename =$(this)[0].files[0].name;     
+             }
+           } 
+            $(this).siblings('.upload_name').val(filename);
+          })
+     })
+      
+
+     function validateSignUpForm() {
+          const mb_nick = $(".mb_nick").val();
+          const mb_phone = $(".mb_phone").val();
+          const mb_password = $(".mb_password").val();
+          const mb_confirm_password = $(".mb_confirm_password").val();
+          const restaurant_img = $(".restaurant_img").get(0).files[0]?? null;
+
+          if (
+               mb_nick ==''|| 
+               mb_password ==''|| 
+               mb_phone==''||
+               mb_confirm_passowrd==''
+               ) {
+           alert("Please fill all boxes")
+           return false;
+          } else if (mb_password !== mb_confirm_password) {
+               alert (`Password confirmation is wrong`);
+               return false;
+           }
+
+          if (!restaurant_img) {
+               alert ("Please upload the image!");
+           return false;
+
+          }
+          
+          return true;
+     }
+</script>
 
 
 
