@@ -39,7 +39,7 @@ body {
     backface-visibility: hidden;
   }
   
-  @media (min-width: 500px) {
+  @media (min-width: 400px) {
     .sphere path {
       stroke-width: .4px;
     }

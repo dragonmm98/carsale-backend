@@ -1,13 +1,64 @@
 <%-include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/menu.css">
+
 <body>
-    <h1>
-        My Restaurnat Page
-    </h1>
-    <%  if (!member) { %>
-        <h3>Siz login qilmagansiz</h3>
-        <% } else { %>
-            <h4>siz auth qilgansiz and your nickname is <%=member.mb_nick%></h4>
-            <% } %>
-</body>
+    <div id="main_container">
+    <div class="group_name">
+        <ul class="nav">
+            <li class="nav-item" style="cursor:pointer">
+                <a class="nav-link active"  href="/resto">Home Page</a>
+              </li>
+            <li class="nav-item" style="cursor:pointer">
+              <a class="nav-link"  href="/resto/products/menu">Products Menu</a>
+            </li>
+             
+                <li class="nav-item" style="cursor:pointer">
+                    <a class="nav-link"  href="/resto/logout">Logout</a>
+                  </li>
+                  </ul>
+                </div>
+
+                <div class="restaurant_menu_frame">
+                    <div class="restaurant_container">
+                        <div class="dishs_table">
+                            <span class="new_dish_txt">
+                                <%=member.mb_nick.toUpperCase() %> Restaurant Menu
+                            </span>
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-light">
+                                    <th scope="col">T/r</th>
+                                    <th scope="col">Product name</th>
+                                    <th scope="col">Product type</th>
+                                    <th scope="col">Product size</th>
+                                    <th scope="col">Product price</th>
+                                    <th scope="col">Remaining Product</th>
+                                    <th scope="col">Product condition</th>
+                                </thead>
+                                <% restaurant_data.map((value,key) => { %>
+                                    
+                                <tbody style="background: white;">
+                                    <td><%=key+1 %></td>
+                                    <td><%=value.product_name %></td>
+                                    <td><%=value.product_collection %></td>
+                                    <td><%=value.product_collection === 'drink' ? value.product_volume : value.product_size %></td>
+                                    <td><%=value.product_price %></td>
+                                    <td><%=value.product_left_cnt %></td>
+                                    <td><select class="spec_select" id="<%=value._id %>">
+                                    <option value="PAUSED" <% value.product_status==='PAUSED' ? 'selected' : '' %>>PAUSED</option>
+                                    <option value="PROCESS" <% value.product_status==='PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                                    <option value="DELETED" <% value.product_status==='DELETED' ? 'selected' : '' %>>DELETED</option>
+                                    </select></td>
+                                </tbody>
+                                <% }); %>
+
+                            </table>
+                        </div>
+                        <form action=""></form>
+                    </div>
+                </div>
+  
+    </div>
+  </body>
 
 <%- include('includes/footer')  %>
