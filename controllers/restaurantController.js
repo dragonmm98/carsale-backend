@@ -85,7 +85,7 @@ restaurantController.loginProcess = async (req,res) => {
         req.session.member = result;
         req.session.save (function () {
             result.mb_type === "ADMIN" 
-            ? res.redirect ("/resto/all-restaurant")
+            ? res.redirect ("/resto/all-restaurants")
             : res.redirect ("/resto/products/menu");
         }); 
         
@@ -131,3 +131,25 @@ restaurantController.checkme = (req,res) => {
         res.json ({state : "fail", message : "Your are not authenticated"});
     }
 };
+
+restaurantController.validateAdmin=(req,res,next) => {
+    if(req.session?.member?.mb_type==="ADMIN") {
+        req.member =req.session.member;
+        next();
+    } else {
+        const html = `<script>alert("Not Permitted!!! The Page is only for Admins"); window.location.replace('/resto'); </script>`;
+        res.end(html);
+    }
+};
+
+
+restaurantController.getAllRestaurants = (req,res) => {
+    try {
+        console.log ("GET cont/getAllRestaurants");
+        res.render("all-restaurants");
+
+    } catch (err) {
+        console.log (`ERROR, cont/logout, ${err.message}`);
+        res.json({ state:"fail", message: err.message});
+    }
+}

@@ -15,12 +15,15 @@ $(function(){
     $(".dish_container").slideToggle(500);
     $(".hiding_btn").css("display","none");
  })
+
    // Product Status Changer
    $(".new_product_status").on("change", async function(e){
     const id= e.target.id;
     const product_status = $(`#${id}.new_product_status`).val();
      try{
-        const response = await axios.post(`/resto/products/edit/${id}`,{id: id, product_status: product_status});
+        const response = await axios.post(
+            `/resto/products/edit/${id}`,
+            {id: id, product_status: product_status});
         const result = response.data;
         console.log("result:", result);
 
