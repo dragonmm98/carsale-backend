@@ -40,5 +40,9 @@ restaurantController.validateAdmin,
  restaurantController.getAllRestaurants);
 
 
+ router_bssr.post ("/all-restaurants/update", 
+restaurantController.validateAdmin,
+ restaurantController.getAllRestaurantsUpdate);
+
 
 module.exports= router_bssr;
