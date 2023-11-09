@@ -45,10 +45,10 @@
                                        </label>
                                     </td>
                                     <td style="width: 13%;">
-                                    <select class="spec_select mb_status">
-                                         <option value="ONPAUSE" <%=value.mb_status === 'ONPAUSE' ? 'selected' : '' %>>ONPAUSE</option>
-                                         <option value="ACTIVE" <%=value.mb_status === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
-                                         <option value="DELETED" <%=value.mb_status === 'DELETED' ? 'selected' : '' %>>DELETED</option>
+                                    <select class="spec_select mb_status" id="<%=value._id %>">
+                                         <option value="ONPAUSE" <%= value.mb_status === "ONPAUSE" ? 'selected' : '' %>>ONPAUSE</option>
+                                         <option value="ACTIVE" <%= value.mb_status === "ACTIVE" ? 'selected' : '' %>>ACTIVE</option>
+                                         <option value="DELETED" <%= value.mb_status === "DELETED" ? 'selected' : '' %>>DELETED</option>
                                     </select>
                                     </td>
                                 </tbody>
