@@ -26,7 +26,7 @@ class Member {
             }                     
             result.mb_password= "";
             return result;
-            }catch (err){
+            } catch (err){
             throw(err);
         }
      }

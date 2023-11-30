@@ -3,6 +3,7 @@ const express = require ("express");
 const app = express ();
 const router = require("./router.js")
 const router_bssr = require("./router_bssr.js");
+const cookieParser = require("cookie-parser");
 
 
 
@@ -18,6 +19,7 @@ const store = new MongoDBStore({
 app.use(express.static("public"));
 app.use(express.json());
 app.use (express.urlencoded({extended:true}));
+app.use (cookieParser());
 
 // Session code
 app.use(
