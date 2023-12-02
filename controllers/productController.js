@@ -5,14 +5,24 @@ const Definer= require("../lib/mistake");
 let productController = module.exports;
 
 productController.getAllProducts = async (req,res) => {
-    try {
+    try { 
         console.log ("Get: cont/getAllProducts");
+        const product = new Product();
+        const result = await product.getAllProductsData(req.member, req.body);
+        res.json({ state: "succeed", data: result });
+
     } catch (err) {
         console.log (`ERROR, cont/getAllProducts ${err.message}`);
         res.json ({state: "fail", message: err.message});
     }
 };
 
+
+
+
+/*********************************************************
+ *                  BSSR BASED METHODS             *
+ **************************************************/
 productController.addNewProduct = async (req,res) => {
     try {
         console.log ("POST: cont/addNewProduct");
@@ -52,5 +62,7 @@ productController.updateChosenProduct = async (req,res) => {
         res.json({state:"fail", message: err.message});
         
     }
+
+
 };
  

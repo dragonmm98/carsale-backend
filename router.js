@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const memberController= require("./controllers/memberController");
+const productController = require("./controllers/productController");
 
 
 /**********************************
@@ -15,7 +16,11 @@ router.get ("/logout", memberController.logout);
 router.get ("/check-me", memberController.checkMyAuthentication);
 router.get ("/member/:id",memberController.retrieveAuthMember, memberController.getChosenMember);
 
+// Product based Routers
 
+router.post ("/products",
+memberController.retrieveAuthMember,
+ productController.getAllProducts);
 
 
 // Other routers
