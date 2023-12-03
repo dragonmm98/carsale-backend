@@ -22,7 +22,13 @@ router.post ("/products",
 memberController.retrieveAuthMember,
  productController.getAllProducts);
 
+router.get ("/products/:id",
+ memberController.retrieveAuthMember, 
+productController.getChosenProduct); 
 
+
+
+ 
 // Other routers
 router.get ("/menu", function (req,res)
 {

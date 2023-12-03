@@ -1,10 +1,12 @@
 const ViewModel = require("../schema/view.model");
 const memberModel = require("../schema/member.model");
+const productModel = require("../schema/product.model");
 
 class View {
     constructor(mb_id) {
         this.ViewModel = ViewModel;
         this.memberModel = memberModel;
+        this.productModel = productModel;
         this.mb_id = mb_id;
     }
 
@@ -14,11 +16,18 @@ class View {
            switch(group_type) {
             case "member":
             result = await this.memberModel
-            .findById({
+            .findOne({
                 _id: view_ref_id,
                  mb_status: "ACTIVE",
                 }).exec();
                 break;
+                case "product":
+                    result = await this.productModel
+                    .findOne({
+                        _id: view_ref_id,
+                         mb_status: "PROCESS",
+                        }).exec();
+                        break;
            }
            return !!result;
         } catch (err) {
@@ -52,6 +61,13 @@ class View {
                 }, {$inc: {mb_views: 1}}
                 ).exec();
                     break;
+                    case "product":
+                        await this.productModel
+                       .findByIdAndUpdate({
+                           _id: view_ref_id,
+                       }, {$inc: {product_views: 1}}
+                       ).exec();
+                           break;
                 }
                 return true;
            
