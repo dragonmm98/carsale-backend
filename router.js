@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const memberController= require("./controllers/memberController");
 const productController = require("./controllers/productController");
+const restaurantController = require("./controllers/restaurantController");
 
 
 /**********************************
@@ -27,6 +28,12 @@ router.get ("/products/:id",
 productController.getChosenProduct); 
 
 
+
+// Restaurant Based Routers 
+
+router.get("/restaurants",
+ memberController.retrieveAuthMember,
+ restaurantController.getRestaurants);
 
  
 // Other routers

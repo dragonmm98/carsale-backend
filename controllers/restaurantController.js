@@ -6,6 +6,31 @@ const Restaurant = require("../models/Restaurant");
 
 let restaurantController = module.exports;
 
+   //*******Rest API ******/
+restaurantController.getRestaurants = async (req, res) => {
+    try {
+        console.log ("Get:cont/getRestaurants");
+        const data = req.query;
+        const restaurant = new Restaurant();
+        const result = await restaurant
+        .getRestaurantsInfo(req.member, data);
+        res.json({ state: "success", data: result })
+    } catch (err) {
+        console.log (`ERROR, cont/getRestaurants, ${err.message}`);
+        res.json ({ state: "fail", message: err.message});
+    }
+}
+
+
+
+
+
+
+
+
+        /******************************
+         ******BSSR RELATED METHODS*** 
+        *****************************/
 restaurantController.home= (req,res) => {
     try {
         console.log ("Get:cont/home");
