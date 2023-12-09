@@ -50,6 +50,10 @@ router.get("/restaurants",
  memberController.retrieveAuthMember,
  orderController.getMyOrders)
 
+ router.post ("/orders/edit", 
+ memberController.retrieveAuthMember,
+ orderController.editChosenOrder);
+
  
 // Other routers
 router.get ("/menu", function (req,res)
