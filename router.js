@@ -46,6 +46,10 @@ router.get("/restaurants",
  memberController.retrieveAuthMember,
  orderController.createOrder);
 
+ router.get ("/orders", 
+ memberController.retrieveAuthMember,
+ orderController.getMyOrders)
+
  
 // Other routers
 router.get ("/menu", function (req,res)
