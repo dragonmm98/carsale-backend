@@ -4,6 +4,9 @@ const memberController= require("./controllers/memberController");
 const productController = require("./controllers/productController");
 const restaurantController = require("./controllers/restaurantController");
 const orderController = require("./controllers/orderController");
+const communityController = require("./controllers/communityController");
+const uploader_community = require ("./utils/upload-multer")("community");
+const uploader_member = require ("./utils/upload-multer")("members");
 
 
 /**********************************
@@ -55,16 +58,16 @@ router.get("/restaurants",
  orderController.editChosenOrder);
 
  
-// Other routers
-router.get ("/menu", function (req,res)
-{
-    res.send("You are in menu page")
-});
+ // Community Related Routers
+router.post("/community/image", 
+uploader_community.single("community_image"),
+communityController.imageInsertion);
+
+router.post ("/community/create", 
+memberController.retrieveAuthMember,
+communityController.createArticle);
 
 
-router.get ("/community", function (req,res)
-{ 
-    res.send("You are in community page")
-});
+
 
 module.exports= router;
