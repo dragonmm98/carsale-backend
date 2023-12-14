@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const memberController= require("./controllers/memberController");
+const followController= require("./controllers/followController");
 const productController = require("./controllers/productController");
 const restaurantController = require("./controllers/restaurantController");
 const orderController = require("./controllers/orderController");
@@ -78,6 +79,13 @@ communityController.getArticles);
 router.get ("/community/single-article/:art_id",
 memberController.retrieveAuthMember,
 communityController.getChosenArticle)
+
+
+
+// Following related Routers*****
+router.post ("/follow/subscribe",
+memberController.retrieveAuthMember,
+followController.subscribe);
 
 
 
