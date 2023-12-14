@@ -71,6 +71,10 @@ router.get ("/community/articles",
 memberController.retrieveAuthMember,
 communityController.getMemberArticles);
 
+router.get ("/community/target", 
+memberController.retrieveAuthMember,
+communityController.getArticles);
+
 
 
 

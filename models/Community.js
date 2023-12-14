@@ -2,7 +2,7 @@
 const BoArticleModel = require("../schema/bo_article.model");
 const Definer = require ("../lib/mistake"); 
 const assert =require("assert");
-const { shapeIntoMongooseObjectId } = require("../lib/config");
+const { shapeIntoMongooseObjectId, board_id_enums_list } = require("../lib/config");
 const View = require("./View");
 
 
@@ -56,6 +56,39 @@ class Community {
 
 
     return result;    
+    } catch (err) {
+        throw err;
+    }
+}
+
+async getArticlesData (member, querydata) {
+    try{
+        const auth_mb_id = shapeIntoMongooseObjectId(member._id);
+        let matches = 
+        querydata.bo_id === "all" ? {
+            bo_id : {$in: board_id_enums_list}, art_status: "active"}
+            : {bo_id: querydata.bo_id, art_status: "active"};
+        querydata.limit *= 1;
+        querydata.page *= 1;
+
+        const sort = querydata.order ? {[`${querydata.order}`]: -1} : {createdAt: -1};
+
+        const result = await this.boArticleModel.aggregate([
+            {$match: matches},
+            {$sort: sort},
+            {$skip: (querydata.page -1 )* querydata.limit},
+            {$limit: querydata.limit},
+            {$lookup: {
+                from:"members",
+                localField: "mb_id",
+                foreignField:"_id",
+                as: "members_data",
+            }}, {$unwind: "$members_data"},
+            //to do member like
+        ]).exec();
+      assert.ok(result, Definer.article_err3)
+
+   return result;
     } catch (err) {
         throw err;
     }
