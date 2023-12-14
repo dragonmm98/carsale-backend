@@ -75,6 +75,10 @@ router.get ("/community/target",
 memberController.retrieveAuthMember,
 communityController.getArticles);
 
+router.get ("/community/single-article/:art_id",
+memberController.retrieveAuthMember,
+communityController.getChosenArticle)
+
 
 
 
