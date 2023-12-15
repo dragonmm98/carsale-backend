@@ -61,7 +61,28 @@ async modifyMemberFollowCounts(mb_id, type, modifier) {
             {$inc: {mb_subscriber_cnt:modifier} }
             ).exec();
     }
+    return true;
     } catch (err) {
+        throw err;
+    }
+}
+async unsubscribeData (member, data) {
+    try {
+      const subscriber_id = shapeIntoMongooseObjectId(member._id),
+      follow_id = shapeIntoMongooseObjectId(data.mb_id);
+     
+      const result = await this.followModel.findOneAndDelete({
+        follow_id: follow_id,
+        subscriber_id: subscriber_id,
+      });
+      console.log(data.mb_id)
+      assert.ok(result, Definer.general_err1);
+      await this.modifyMemberFollowCounts(follow_id, "subscriber_change", -1);
+      await this.modifyMemberFollowCounts(subscriber_id, "follow_change", -1);
+ 
+      
+      return true;
+    } catch (err){
         throw err;
     }
 }
