@@ -131,7 +131,7 @@ async getMemberFollowersData (member,inquery) {
         ]
            //following following vack to subscriber 
            if (member && member._id === inquery.mb_id) { 
-            aggregateQuery.push(lookup_auth_member_following(follow_id)); 
+            aggregateQuery.push(lookup_auth_member_following(follow_id, "follows")); 
         } 
  
         const result = await this.followModel.aggregate(aggregateQuery).exec(); 
