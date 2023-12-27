@@ -125,7 +125,12 @@ class Member {
           : await like.insertMemberLike(like_refer_id, group_type)
           assert.ok(data, Definer.general_err1);
 
-          return true;
+          const result = {
+            like_group: data.like_group,
+            like_ref_id: data.like_ref_id,
+            like_status:doesExist ? 0 : 1,
+          };
+          return result;
 
         } catch (err) {
             throw err;
