@@ -8,7 +8,7 @@ communityController.imageInsertion = async (req,res) => {
     try {
         console.log("connect/imageInsertion")
      assert.ok(req.file, Definer.general_err3);
-     const image_url = req.file.path;
+     const image_url = req.file.path.replace(/\\/g, "/");
      
      res.json({state: "success", data: image_url});
     } catch (err) {

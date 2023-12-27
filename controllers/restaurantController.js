@@ -87,7 +87,7 @@ restaurantController.signupProcess = async (req,res) => {
         
         let data  = req.body;
         data.mb_type = "RESTAURANT";
-        data.mb_image = req.file.path;
+        data.mb_image = req.file.path.replace(/\\/g, "/");
         
         const member = new Member();
         const new_member = await member.signupData(data);
