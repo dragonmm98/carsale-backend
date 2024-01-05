@@ -66,7 +66,7 @@ class Community {
 
 async getArticlesData (member, querydata) {
     try{
-        const auth_mb_id = shapeIntoMongooseObjectId(member._id);
+        const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
         let matches = 
         querydata.bo_id === "all" ? {
             bo_id : {$in: board_id_enums_list}, art_status: "active"}
