@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-const http = require("http");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 const connectionToString = process.env.MONGO_URL
@@ -22,8 +21,8 @@ console.log ('Mongoose Connected SUccesfully');
 
 
     
-const app =require ("./app");
-const server = http.createServer(app);
+const server =require ("./app");
+// const server = http.createServer(app);
 let port= process.env.PORT || 3007;
 server.listen(port,function (){
 console.log (`The server is running successfully on port ${port},http://localhost:${port}`)
