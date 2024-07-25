@@ -1,0 +1,72 @@
+<%-include('includes/header') %>
+<link rel="stylesheet" type="text/css" href="/css/menu.css">
+
+<body>
+    <div id="main_container">
+        
+        <div class="group_name">
+            <ul class="nav justify-content-ceneter">
+                <li class="nav-item" style="cursor: pointer">
+                <a class="nav-link active" href="/dealers">Home</a>
+            </li>
+            <li class="nav-item" style="cursor: pointer">
+                <a class="nav-link active" href="/dealers/all-dealers">All Dealers</a>
+            </li>
+            <li class="nav-item" style="cursor: pointer">
+                <a 
+                class="nav-link active" 
+                onclick="return confirm('Do you want to logout?')"
+                href="/dealers/logout">
+                Logout</a>
+            </li>
+             </ul>
+        </div>
+
+
+        <div class="dealers_menu_frame">
+            <div class="dealers_container">
+           <div class="dealer_table">
+            <span class="new_car_txt"> 
+                All Dealers List </span>
+
+                <table class="table table-hover table-sm">
+                    <thead class="thead-light">
+                        <tr class="thead-light">
+                        <th scope="col">T/r</th>
+                        <th scope="col">Dealer name</th>
+                        <th scope="col">Dealer phone number</th>
+                        <th scope="col">Dealer TOP</th>
+                        <th scope="col">Dealer status</th>
+                    </tr>
+                    </thead> 
+                    <% dealers_data.map(function(value, key) { %>
+                        <tbody style="background:white">
+                        <td><%= key + 1 %></td>
+                        <td><%= value.mb_nick  %></td>
+                        <td><%= value.mb_phone %></td>
+                        <td style="width:13%;">
+                           <label class="switch">
+                            <input type="checkbox" class="mb_top" id="<%= value._id %>" 
+                            <%= value.mb_top === 'Y' ? 'checked' : '' %>>
+                            <span class="slider round"></span>
+                           </label>
+                        </td>
+                        <td style="width: 13%;">
+                        <select class="spec_select mb_status" id="<%=value._id %>">
+                             <option value="ONPAUSE" <%= value.mb_status === "ONPAUSE" ? 'selected' : '' %>>ONPAUSE</option>
+                             <option value="ACTIVE" <%= value.mb_status === "ACTIVE" ? 'selected' : '' %>>ACTIVE</option>
+                             <option value="DELETED" <%= value.mb_status === "DELETED" ? 'selected' : '' %>>DELETED</option>
+                        </select>
+                        </td>
+                    </tbody>
+                       <% }); %>
+                    </table>
+           </div> 
+           </div>
+        </div>
+
+    </div>
+    <script src="/alldealers.js"></script>
+</body>
+
+<%- include('includes/footer')  %>

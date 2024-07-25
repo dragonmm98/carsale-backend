@@ -1,27 +1,28 @@
 <%- include("includes/header") %>
-<link rel="stylesheet" type="text/css" href="/css/login.css">
+<link rel="stylesheet" type="text/css" href="/css/signup.css">
 
 <body>
+    <div class="wrapper">
      <form
      onsubmit="return validateSignUpForm()" 
-     class="login_container" 
-     action="/resto/sign-up" 
+     class="login-box" 
+     action="/dealers/signup" 
      method="post" 
      enctype="multipart/form-data">
-   <div class="login_frame" style="width: 650px; height: 730px;">
+   <div class="input-box">
        <div class="login_top">
           <span>Registration</span>
-          <div>Return to Home Page <a href="/resto" style="color: #6440fb;">Home</a>
+          <div>Return to Home Page <a href="/dealers" style="color: #6440fb;">Home</a>
           </div>
           <p>
                Do you have existing account?
-               <a href="/resto/login" style="color:#6440FB;">Login</a>
+               <a href="/dealers/login" style="color:#6440FB;">Login</a>
           </p>
        </div>
          
        <div class="sign_input_frame">
           <div class="sign_up_frame">
-               <label>User name</label>
+              
                <input 
                type="text"
                name="mb_nick"
@@ -32,7 +33,7 @@
                >
           </div>   
           <div class="sign_up_frame">
-               <label>Phone number</label>
+              
                <input 
                type="text"
                name="mb_phone"
@@ -46,7 +47,7 @@
        
        <div class="sign_input_frame">
           <div class="sign_up_frame">
-               <label>Password</label>
+               
                <input 
                type="password"
                name="mb_password"
@@ -57,7 +58,7 @@
                >
           </div>   
           <div class="sign_up_frame">
-               <label>Password confirmation</label>
+              
                <input 
                type="password"
                name="mb_confirm_password"
@@ -70,24 +71,24 @@
        </div>
     <div class="login_input_frame">
        <div class="media_frame">
-        <img class="upload_image_frame" src="/images/default_resto.jpg" alt="">
+        <img class="upload_image_frame" src="/images/cloud upload.jpg" alt="">
         <div class="upload_cont">
           <span class="media_text">Picture</span>
           <div class="filebox bs3-primary preview-image">
                <input 
                class="upload_name" 
-               value="choose picture" 
+               value="Upload Picture" 
                disabled="disabled"
                >
-               <label for="input_file">Upload  picture</label>
+
                <input 
                type="file"
                id="input_file"
-               name="restaurant_img"
-               class="upload-hidden form-control-file restaurant_img"
+               name="dealers_img"
+               class="upload-hidden form-control-file dealers_img"
                >
                </div>
-               <p class="thumbnails">Upload your restaurant picture here <br>Picture should be in .jpg, .jpeg,
+               <p class="thumbnails">Upload your Profile picture here <br>Picture should be in .jpg, .jpeg,
                 or .png format<br>Upload only original picture it must not include any text  </p>
 
         </div>
@@ -99,6 +100,7 @@
      </div>
 
    </form>  
+</div>
 </body>
 
 <script>
@@ -121,7 +123,7 @@
                          .attr("src", URL.createObjectURL(uploading_file))
                          .addClass("success"); 
                     }
-                    filename =$(this)[0].files[0].name;     
+                    // filename =$(this)[0].files[0].name;     
              }
            } 
             $(this).siblings('.upload_name').val(filename);
@@ -134,7 +136,7 @@
           const mb_phone = $(".mb_phone").val();
           const mb_password = $(".mb_password").val();
           const mb_confirm_password = $(".mb_confirm_password").val();
-          const restaurant_img = $(".restaurant_img").get(0).files[0]?? null;
+          const dealers_img = $(".dealers_img").get(0).files[0]?? null;
 
           if (
                mb_nick ==''|| 
@@ -149,7 +151,7 @@
                return false;
            }
 
-          if (!restaurant_img) {
+          if (!dealers_img) {
                alert ("Please upload the image!");
            return false;
 

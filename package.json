@@ -1,7 +1,7 @@
 {
-  "name": "papay",
+  "name": "Carsale",
   "version": "1.0.0",
-  "description": "it is our Papay project",
+  "description": "it is our Carsale project",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

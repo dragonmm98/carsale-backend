@@ -1,0 +1,219 @@
+<%-include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/menu.css">
+<body>
+   <div id="main_container">
+    <div class="group_name">
+     <ul class="nav justify-content-ceneter">
+        <li class="nav-item" style="cursor: pointer">
+        <a class="nav-link active" href="/dealers">Home</a>
+    </li>
+    <li class="nav-item" style="cursor: pointer">
+        <a class="nav-link active" href="/dealers/products/menu">My Dealers</a>
+    </li>
+    <li class="nav-item" style="cursor: pointer">
+        <a 
+        class="nav-link active" 
+        onclick="return confirm('Do you want to logout?')"
+        href="/dealers/logout">
+        Logout</a>
+    </li>
+     </ul>
+    </div>
+
+    <div class="dealers_menu_frame">
+        <div class="dealers_container">
+            <div class="car_table">
+            <span class="new_car_txt"><%= member.mb_nick.toUpperCase() %> Car Menu
+            </span>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <th scope="col">T/r</th>
+                    <th scope="col">Product name</th>
+                    <th scope="col">Product company</th>
+                    <th scope="col">Product collection</th>
+                    <th scope="col">Product price</th>
+                    <th scope="col">Product milaege</th>
+                    <th scope="col">Product size</th>
+                    <th scope="col">Product fuel type</th>
+                    <th scope="col">Product year</th>
+                    <th scope="col">Product color</th>
+                    <th scope="col">Product status</th>
+                </thead> 
+                <% dealer_data.map((value,key) => { %>
+                <tbody style="background: white;">
+                    <td><%= key +1 %></td>
+                    <td><%= value.product_name %></td>
+                    <td><%= value.product_company %></td>
+                    <td><%= value.product_collection %></td>
+                    <td><%= value.product_price %></td>
+                    <td><%= value.product_milaege %></td>
+                    <td><%= value.product_size %></td>
+                    <td><%= value.product_fuel_type %></td>
+                    <td><%= value.product_year %></td>
+                    <td><%= value.product_color %></td>
+                    <td>
+                        <select class="spec_select new_product_status" id="<%= value._id %>">
+                       <option value="RESERVED" <%= value.product_status==="RESERVED" ? 'selected' : '' %>>RESERVED</option>
+                       <option value="PROCESS" <%= value.product_status==="PROCESS" ? 'selected' : '' %>>PROCESS</option>
+                       <option value="SOLD" <%= value.product_status==="SOLD" ? 'selected' : '' %>>SOLD</option>     
+                       <option value="DELETED" <%= value.product_status==="DELETED" ? 'selected' : '' %>>DELETED</option>     
+                        </select>
+                    </td>
+                </tbody>
+                <% }); %>
+                </table>
+                <div class="login_input" style="align-items: flex-end; margin-bottom: 25px;">
+                 <button class="btn btn-primary hiding_btn">Add Product</button>
+            </div>
+               
+
+
+                <form onsubmit="return validateForm()"
+                 action="/dealers/products/create" method="post"
+                 class="car_container" enctype="multipart/form-data">
+                 <div class="login_input" style="display:flex; align-items:center;">
+                 <span class="new_car_txt">New Car</span>
+                 </div>
+
+                 <div>
+                  <div class="login_input">
+                    <label for="">Product Name</label>
+                    <input type="text" placeholder="Car name" name="product_name" class="product_name"/>
+                  </div>
+                   <input name="product_status" value="PROCESS" class="product_status" hidden/>
+                 </div>
+                 
+                 <div class="half_input_frame">
+                    <div class="half_input">
+                        <label for="">Product Price</label>
+                        <input type="text" placeholder="Product Price" name="product_price" class="product_price"/>
+                    </div>
+                    <div class="half_input">
+                        <label for="">Product Milaege</label>
+                        <input type="text" placeholder="Product Milaege" name="product_milaege" class="product_milaege"/>
+                    </div>
+                 </div>
+
+                 <div class="half_input_frame">
+                    <div class="half_input">
+                        <label for="">Product Company</label>
+                        <input type="text" placeholder="Product Company" name="product_company" class="product_company"/>
+                    </div>
+                    <div class="half_input">
+                        <label for="">Product collection</label>
+                        <select class="product_collection" name="product_collection">
+                            <option value="NEW" selected>NEW</option>
+                            <option value="USED">USED</option>
+                        </select>
+                    
+                    </div>
+                 </div>
+
+                 <div class="half_input_frame">
+                    <div class="half_input">
+                        <label for="">Product Size</label>
+                        <select class="product_size" name="product_size">
+                            <option value="ORDINARY" selected>ORDINARY</option>
+                            <option value="SPORT">SPORT</option>
+                            <option value="MINI">MINI</option>
+                            <option value="VAN">VAN</option>
+                            <option value="TRUCK">TRUCK</option>
+                        </select>
+                    </div>
+                    <div class="half_input">
+                        <label for="">Product fuel type</label>
+                        <select class="product_fuel_type" name="product_fuel_type">
+                            <option value="GASOLINE" selected>GASOLINE</option>
+                            <option value="DIESEL">DIESEL</option>
+                            <option value="GAS">GAS</option>
+                            <option value="ELECTRIC">ELECTRIC</option>
+                            <option value="HYBRID">HYBRID</option>
+                        </select>
+                    </div>
+                 </div>
+
+                 <div class="half_input_frame">
+                    <div class="half_input">
+                        <label for="">Product Year</label>
+                        <input type="number" min="1990" max="2099" step="1" value="2024" placeholder="Product Year" name="product_year" class="product_year"/>
+                    </div>
+                    <div class="half_input">
+                        <label for="">Product Color</label>
+                        <input type="text" placeholder="Product Color" name="product_color" class="product_color"/>
+                    </div>
+                 </div>
+                  
+                 <div class="login_input">
+                    <label>About Vehicle</label>
+                    <textarea name="product_description" class="product_description"></textarea>
+                 </div>
+                 <div class="img_frame">
+                    <label for="">Vehicle Pictures</label>
+                    <div class="media_frame">
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="1" id="image_section_1" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_one"
+                            onchange="previewFileHandler(this, 1)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="2" id="image_section_2" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_two"
+                            onchange="previewFileHandler(this, 2)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="3" id="image_section_3" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_three"
+                            onchange="previewFileHandler(this, 3)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="4" id="image_section_4" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_four"
+                            onchange="previewFileHandler(this, 4)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="5" id="image_section_5" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_five"
+                            onchange="previewFileHandler(this, 5)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="6" id="image_section_6" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_six"
+                            onchange="previewFileHandler(this, 6)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="7" id="image_section_7" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_seven"
+                            onchange="previewFileHandler(this, 7)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="8" id="image_section_8" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_eight"
+                            onchange="previewFileHandler(this, 8)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="9" id="image_section_9" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_nine"
+                            onchange="previewFileHandler(this, 9)"/>
+                        </div>
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="10" id="image_section_10" alt=""/>
+                            <input type="file" id="file" name="product_images" class="image_ten"
+                            onchange="previewFileHandler(this, 10)"/>
+                        </div>
+                    </div>
+                 </div>
+                 
+                 <div class="login_input" style="align-items:flex-end; margin-bottom: 25px;">
+                    <button type="submit" class="btn btn-primary" id="create_product">Apply New Product</button>
+                  </div>
+
+                </form>
+        </div>
+    </div>
+    
+ </div>    
+<script src="/addproduct.js"></script>
+</body>
+
+<%- include('includes/footer')  %>

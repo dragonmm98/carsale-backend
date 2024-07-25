@@ -1,43 +1,42 @@
-<%-include("includes/header")%>
-<link rel="stylesheet"  href="/css/login.css">
-
-
+<%- include ("includes/header") %>
+<link rel="stylesheet" href="/css/login.css">
 <body>
-     <form class="login_container" action="/resto/login" method="post">
-          <div class="login_frame" style="height:460px">
-               <div class="login_top">
-                    <span>Enter Web side</span>
-                    <div> Enter Main Page <a href="/resto" style="color:#6440FB">Home</a></div>
-                    <p>Registration Page <a href="/resto/sign-up"  style="color:#6440FB">Registration</a></p>
+  
+          <div class="wrapper">
 
-               </div>
-            <div class="login_input_frame">
-               <div class="login_input_container">
-                      <label>User name</label>
-                      <input 
-                      type="text"
-                      name="mb_nick" 
-                      placeholder="User name" 
-                      value="" 
-                      required>
-               </div>
-               <div class="login_input_container" >
-                    <label>Enter Your Password</label>
-                    <input 
-                    type="password" 
-                    name="mb_password" 
-                    placeholder="Password" 
-                    value="" 
-                    required>
-               </div>
-            </div>  
-            
-            <button class="login_btn" name="login" type="submit">Login</button>
-        
+            <div class="login-box">
+                <form class="login_container" action="/dealers/login" method="post">
+                <h2>Login</h2>
+          
+                <div class="input-box">
+                  <span class="icon">
+                    <ion-icon name="username"></ion-icon>
+                  </span>
+                  <input type="text" name="mb_nick" required>
+                  <label>Username</label>
+                </div>
+          
+                <div class="input-box">
+                  <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                  </span>
+                  <input type="password" name="mb_password" value="" required>
+                  <label>Password</label>
+                </div>
+          
+                <div class="remember-forgot">
+                  <label><input type="checkbox"> Remember me</label>
+                  <a href="/dealers">Enter Main Page</a>
+                </div>
+          
+                <button class="login_btn" name="login" type="submit">Login</button>
+          
+                <div class="register-link">
+                  <p>Don't have an account? <a href="/dealers/signup">Register</a></p>
+                </div>
+              </form>
+            </div>
+          
           </div>
-      </form>
 </body>
-
-
-
-<%- include("includes/footer") %>
+<%- include ("includes/footer") %>

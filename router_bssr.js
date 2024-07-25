@@ -1,6 +1,6 @@
 const express = require("express");
 const router_bssr = express.Router();
-const restaurantController= require("./controllers/restaurantController");
+const dealerController= require("./controllers/dealerController");
 const productController=require("./controllers/productController");
 const uploader_product = require("./utils/upload-multer")("products"); 
 const uploader_members = require("./utils/upload-multer")("members"); 
@@ -10,39 +10,39 @@ const uploader_members = require("./utils/upload-multer")("members");
 *********************************/
 
 // Member routers
- router_bssr.get("/", restaurantController.home);
+ router_bssr.get("/", dealerController.home);
 
 router_bssr
-.get("/sign-up", restaurantController.getSignupMyRestaurant)
-.post("/sign-up",uploader_members.single("restaurant_img"), restaurantController.signupProcess);
+.get("/signup", dealerController.getSignupMyDealerPage)
+.post("/signup",uploader_members.single("dealers_img"), dealerController.signupProcess);
 
 router_bssr
-.get("/login", restaurantController.getLoginMyRestaurant)
-.post("/login", restaurantController.loginProcess);
+.get("/login", dealerController.getLoginMyDealerPage)
+.post("/login", dealerController.loginProcess);
 
-router_bssr.get ("/logout", restaurantController.logout);
+router_bssr.get ("/logout", dealerController.logout);
 
-router_bssr.get ("/products/menu", restaurantController.getMyRestaurantProducts);
-router_bssr.get ("/check-me", restaurantController.checkme);
+router_bssr.get ("/products/menu", dealerController.getMyDealerProducts);
+router_bssr.get ("/check-me", dealerController.checkme);
 
 router_bssr.post ("/products/create",
-  restaurantController.validateAuthRestaurant,
+  dealerController.validateAuthDealer,
   uploader_product.array("product_images", 5),
    productController.addNewProduct);
 
  router_bssr.post ("/products/edit/:id",
- restaurantController.validateAuthRestaurant,
+ dealerController.validateAuthDealer,
  productController.updateChosenProduct);
 
 
-router_bssr.get ("/all-restaurants", 
-restaurantController.validateAdmin,
- restaurantController.getAllRestaurants);
+router_bssr.get ("/all-dealers", 
+dealerController.validateAdmin,
+ dealerController.getAllDealers);
 
 
- router_bssr.post ("/all-restaurants/update", 
-restaurantController.validateAdmin,
- restaurantController.getAllRestaurantsUpdate);
+ router_bssr.post ("/all-dealers/update", 
+dealerController.validateAdmin,
+ dealerController.getAllDealersUpdate);
 
 
 module.exports= router_bssr;

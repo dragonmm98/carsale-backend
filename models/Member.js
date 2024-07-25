@@ -12,13 +12,11 @@ class Member {
     constructor () {
         this.memberModel=MemberModel
     }
-     async signupData(input) {
-        try {
-            
+    async signupData(input) {
+        try { 
             const salt = await bcrypt.genSalt();
             input.mb_password = await bcrypt.hash(input.mb_password, salt);
             const new_member =new this.memberModel(input);
-
             let result;
             try {
                  result = await new_member.save();
@@ -50,6 +48,7 @@ class Member {
             throw(err);
         }
      }
+
 
      async getChosenMemberData (member,id) {
         try {

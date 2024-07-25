@@ -3,7 +3,7 @@ const router = express.Router();
 const memberController= require("./controllers/memberController");
 const followController= require("./controllers/followController");
 const productController = require("./controllers/productController");
-const restaurantController = require("./controllers/restaurantController");
+const dealerController = require("./controllers/dealerController");
 const orderController = require("./controllers/orderController");
 const communityController = require("./controllers/communityController");
 const uploader_community = require ("./utils/upload-multer")("community");
@@ -45,13 +45,13 @@ productController.getChosenProduct);
 
 // Restaurant Based Routers 
 
-router.get("/restaurants",
+router.get("/dealer",
  memberController.retrieveAuthMember,
- restaurantController.getRestaurants);
+ dealerController.getDealers);
 
- router.get ("/restaurants/:id", 
+ router.get ("/dealer/:id", 
  memberController.retrieveAuthMember,
- restaurantController.getChosenRestaurant);
+ dealerController.getChosenDealer);
 
 
  //Order Based Routers 

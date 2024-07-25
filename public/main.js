@@ -1,1 +1,1 @@
-console.log ("Main js ishga tushdi")
+console.log("Main.js ishga tushdi")

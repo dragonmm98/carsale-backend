@@ -12,7 +12,7 @@ const Definer = require("../lib/mistake");
 
 memberController.signup = async (req,res) => {
     try{
-        console.log ("post:cont/signup");
+        console.log ("POST:connect/signup");
         const data  = req.body;
         const member = new Member();
         const new_member = await member.signupData(data);
@@ -25,7 +25,7 @@ memberController.signup = async (req,res) => {
         
         res.json ({state:"succeed", data: new_member});
     } catch(err){
-        console.log (`ERROR, cont/signup, ${err.message}`);
+        console.log (`ERROR, connect/signup, ${err.message}`);
         res.json({ state:"fail", message: err.message});
     }
 };
@@ -33,7 +33,7 @@ memberController.signup = async (req,res) => {
 // ** Login Page**
 memberController.login = async (req,res) => {
     try{
-        console.log ("post:cont/login");
+        console.log ("POST:connect/login");
         const data  = req.body;
         const member = new Member();
         const result = await member.loginData(data);
@@ -45,7 +45,7 @@ memberController.login = async (req,res) => {
         
         res.json ({state:"succeed", data: result});
     } catch(err){
-        console.log (`ERROR, cont/login, ${err.message}`);
+        console.log (`ERROR, connect/login, ${err.message}`);
         res.json({ state:"fail", message: err.message});
     }
 };

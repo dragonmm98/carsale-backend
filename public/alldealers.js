@@ -1,11 +1,11 @@
 
-$(function(){
-    // Manipulate restaurant top
+$(function() {
+    // Manipulate dealer top
     $(".mb_top").on('change', function(e) {
         const id = e.target.id;
         const mb_top = e.target.checked ? 'Y' : 'N';
         
-        axios.post("/resto/all-restaurants/update",{id: id, mb_top: mb_top})
+        axios.post("/dealers/all-dealers/update",{id: id, mb_top: mb_top})
         .then(response => {
             const result = response.data;
             if (result.state === 'success') alert ('Successfully updated!');
@@ -16,13 +16,12 @@ $(function(){
 
     });
 
-     // Manipulate Restaurant status 
+     // Manipulate Dealers status 
      $(".mb_status").on('change', function(e) {
         const id = e.target.id;
         const mb_status = $(`#${id}.mb_status`).val();
-        console.log("mb_status", mb_status)
         
-        axios.post("/resto/all-restaurants/update",{id: id, mb_status: mb_status})
+        axios.post("/dealers/all-dealers/update",{id: id, mb_status: mb_status})
         .then(response => {
             const result = response.data;
             if (result.state === 'success') alert ('Successfully updated!');

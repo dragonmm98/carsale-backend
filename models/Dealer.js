@@ -4,14 +4,14 @@ const Definer = require("../lib/mistake");
 const MemberModel = require("../schema/member.model");
 const Member = require("./Member")
 
-class Restaurant {
+class Dealer {
     constructor() {
         this.memberModel=MemberModel
     }
-    async getRestaurantsInfo (member, data) {
+    async getDealersInfo (member, data) {
         try {
           const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
-          let match = {mb_type: "RESTAURANT", mb_status: "ACTIVE"};
+          let match = {mb_type: "DEALER", mb_status: "ACTIVE"};
           let aggregationQuery = [];
           data.limit = data ['limit'] *1;
           data.page = data ['page'] *1;
@@ -51,7 +51,7 @@ class Restaurant {
     }
     
 
-    async getChosenRestaurantData (member,id) {
+    async getChosenDealerData (member,id) {
         try {
             id = shapeIntoMongooseObjectId(id);
             if(member) {
@@ -73,11 +73,11 @@ class Restaurant {
     
     //---------------************BSSR********--------------//
     //***********BSSR Related MEthods *******/
-    async getRestaurantsData () {
+    async getDealersData () {
         try {
             const result = await this.memberModel
             .find({
-                mb_type: "RESTAURANT",
+                mb_type: "DEALER",
             })
             .exec();
 
@@ -88,7 +88,7 @@ class Restaurant {
         }
     }
 
-    async getAllRestaurantsUpdateData (update_data) {
+    async getAllDealersUpdateData (update_data) {
         try {
             const id = shapeIntoMongooseObjectId(update_data?.id);
             const result = await this.memberModel.findByIdAndUpdate(
@@ -104,7 +104,8 @@ class Restaurant {
             throw err;
         }
     }
+    
 }
 
 
-module.exports = Restaurant;
+module.exports = Dealer;

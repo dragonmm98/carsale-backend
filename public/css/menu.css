@@ -1,16 +1,17 @@
-.restaurant_menu_frame{
+.dealers_menu_frame{
     position: relative;
     padding-bottom: 80px;
     width: 100%;
     height: auto;
+    box-shadow: 5px 5px 5px red;
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #2c261e;
+    background: #341616;
 }
 
-.restaurant_menu_frame .restaurant_container{
+.dealers_menu_frame .dealers_container{
     position: relative;
     margin-top: 100px;
     width: 1320px;
@@ -20,7 +21,7 @@
     flex-direction: column;
     align-items: center;
 }
-.restaurant_container .dishs_table {
+.dealers_container .car_table {
     position: relative;
     width: 100%;
     height: auto;
@@ -30,7 +31,7 @@
     align-items: center;
     
 }
- .new_dish_txt{
+ .new_car_txt{
     font-family: "Source Serif Pro";
     font-style: normal;
     font-weight: 400;
@@ -54,7 +55,7 @@
     color: #4f547B;
 }
 
-.restaurant_container .dish_container{
+.dealers_container .car_container{
    position: relative;
    margin-top: 20px;
    width: 100%;
@@ -64,7 +65,7 @@
    align-items: center;
 }
 
-.long_input {
+.login_input {
     position: relative;
     margin-top: 25px;
     width: 100%;
@@ -73,7 +74,7 @@
     flex-direction: column;
 }
 
-.long_input .new_dish_txt{
+.login_input .new_car_txt{
     font-family: "Source Serif Pro";
     font-style: normal;
     font-weight: 400;
@@ -81,16 +82,8 @@
     line-height: 25px;
     color: #ffffff;
 }
-.long_input{
-    position: relative;
-    margin-top: 25px;
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
 
-}
-.long_input label{
+.login_input label{
     font-family: "Source Serif Pro";
     font-style: normal;
     font-weight: 400;
@@ -98,7 +91,7 @@
     line-height: 25px;
     color: #ffffff;
 }
-.long_input input{
+.login_input input{
     position: relative;
     margin-top: 10px;
     padding-left: 20px;
@@ -173,7 +166,7 @@
     line-height: 26px;
     color: #4f547b;
 }
-.long_input textarea {
+.login_input textarea {
     position: relative;
     margin-top: 10px;
     padding: 20px;
@@ -211,8 +204,8 @@
     position: relative;
     margin-top: 10px;
     width: 100%;
-    height: 250px;
-
+    gap: 9px;
+    height: 190px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -248,7 +241,7 @@
 
 }
 
-.restaurant_container .resto_table {
+.dealers_container .dealer_table {
     position: relative;
     width: 85%;
     height: auto;

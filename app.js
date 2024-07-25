@@ -2,7 +2,7 @@
 const express = require ("express");
 const app = express ();
 const router = require("./router.js")
-const router_bssr = require("./router_bssr.js");
+const router_bssr = require("./router_bssr");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const http = require("http");
@@ -54,7 +54,7 @@ app.set ("view engine","ejs");
 
 //Routing codes
 app.use ("/", router);
-app.use ("/resto", router_bssr); //ananaviy yo'l
+app.use ("/dealers", router_bssr); //ananaviy yo'l
 
 const server = http.createServer(app);
 //***SOCKET.IO BACKEND SERVER ****/
