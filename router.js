@@ -43,7 +43,7 @@ productController.getChosenProduct);
 
 
 
-// Restaurant Based Routers 
+// Dealer Based Routers 
 
 router.get("/dealer",
  memberController.retrieveAuthMember,

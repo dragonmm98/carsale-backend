@@ -3,10 +3,12 @@ const { shapeIntoMongooseObjectId, lookup_auth_member_liked } = require("../lib/
 const Definer = require("../lib/mistake");
 const ProductModel= require("../schema/product.model");
 const Member = require("./Member");
+const EventModel = require("../schema/eventModel")
 
 class Product {
     constructor () {
        this.productModel=ProductModel;
+       this.eventModel=EventModel
         
      }
      
@@ -16,15 +18,15 @@ class Product {
             const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
 
             let match = {product_status: "PROCESS"};
-            if (data.restaurant_mb_id) {
-                match ["restaurant_mb_id"] = shapeIntoMongooseObjectId(
-                    data.restaurant_mb_id
+            if (data.dealers_mb_id) {
+                match ["dealers_mb_id"] = shapeIntoMongooseObjectId(
+                    data.dealers_mb_id
                 );
-                match["product_collection"] = data.product_collection;
+                match["product_size"] = data.product_size;
             }
 
             const sort = 
-            data.order === "product_price" 
+            data.order === "product_price"
             ? { [data.order] : 1 } 
             : { [data.order] : -1 };
 
@@ -85,6 +87,20 @@ class Product {
             throw err;
         }
      }
+           ///Admin event 
+     async getAllEventsDataAdmin(member) {
+        try {
+            
+            member._id = shapeIntoMongooseObjectId(member._id);
+              const result = await this.eventModel.find({
+                admin_mb_id: member._id,
+            });
+            assert.ok(result,Definer.general_err1);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+     }
 
      async addNewProductData (data,member) {
         try{
@@ -121,6 +137,43 @@ class Product {
             assert.ok(result,Definer.general_err1);
             return result;
 
+        } catch (err) {
+            throw err;
+        }
+     }
+   ///////Admin Event Control////
+     async updateChosenEvent (id,updated_data,mb_id) {
+        try {
+            id= shapeIntoMongooseObjectId(id);
+            mb_id =shapeIntoMongooseObjectId(mb_id);
+
+            const result= await this.eventModel
+            .findOneAndUpdate({_id: id, admin_mb_id: mb_id},
+                updated_data,
+                {
+                    runValidators:true,
+                    lean:true,
+                    returnDocument:"after",
+                }
+            ).exec();
+
+            assert.ok(result,Definer.general_err1);
+            return result;
+
+        } catch (err) {
+            throw err;
+        }
+     }
+     async addNewEventData (data,member) {
+        try{
+        data.admin_mb_id = shapeIntoMongooseObjectId(member._id);
+        
+
+        const new_event = new this.eventModel(data);
+        const result = await new_event.save();
+
+        assert.ok(result,Definer.product_err1);
+        return result;
         } catch (err) {
             throw err;
         }

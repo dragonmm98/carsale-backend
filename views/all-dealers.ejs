@@ -61,10 +61,99 @@
                     </tbody>
                        <% }); %>
                     </table>
+                         
+
+                    <div class="dealer_table">
+                        <span class="new_car_txt"> 
+                            All Event List </span>
+            
+                            <table class="table table-hover table-sm">
+                                <thead class="thead-light">
+                                    <tr class="thead-light">
+                                    <th scope="col">T/r</th>
+                                    <th scope="col">Event name</th>
+                                    <th scope="col">Event status</th>
+                                </tr>
+                                </thead> 
+                                <% event_data.map(function(value, key) { %>
+                                    <tbody style="background:white">
+                                    <td><%= key + 1 %></td>
+                                    <td><%= value.event_name  %></td>
+                                    <td style="width: 13%;">
+                                    <select class="spec_select new_product_status" id="<%=value._id %>">
+                                         <option value="active" <%= value.event_status === "active" ? 'selected' : '' %>>ACTIVE</option>
+                                         <option value="deleted" <%= value.event_status === "deleted" ? 'selected' : '' %>>DELETED</option>
+                                    </select>
+                                    </td>
+                                </tbody>
+                                   <% }); %>
+                                </table>
+                                </div>
+
+                    
+                    <div class="login_input" style="align-items: flex-end; margin-bottom: 25px;">
+                        <button class="btn btn-primary hiding_btn">Add Event</button>
+                   </div>
+               
+                
+                   <form onsubmit="return validateForm()"
+                   action="/dealers/event/create" method="post"
+                   class="car_container" enctype="multipart/form-data">
+                   <div class="login_input" style="display:flex; align-items:center;">
+                   <span class="new_car_txt">New Event</span>
+                   </div>
+       
+                   <div>
+                    <div class="login_input">
+                      <label for="">Event Name</label>
+                      <input type="text" placeholder="Event name" name="event_name" class="product_name"/>
+                    </div>
+                   </div>
+                   
+                   <div class="half_input_frame">
+                      <div class="half_input">
+                          <label for="">Event type</label>
+                          <input type="text" placeholder="Event type" name="event_type" class="product_price"/>
+                      </div>
+                   </div>
+                   <div class="half_input_frame">
+                    <div class="half_input">
+                        <label for="">Event status</label>
+                        <select class="product_collection" name="event_status">
+                            <option value="active" selected>Active</option>
+                            <option value="deleted">Deleted</option>
+                        </select>
+                    
+                    </div>
+                 </div>
+                  
+                 <div class="login_input">
+                    <label>Event description</label>
+                    <textarea name="event_description" class="product_description"></textarea>
+                 </div>
+                 <div class="img_frame">
+                    <label for="">Event Picture</label>
+                    <div class="media_frame">
+                        <div class="upload_img_box">
+                            <img src="/images/upload.png" class="1" id="image_section_1" alt=""/>
+                            <input type="file" id="file" name="event_image" class="image_one"
+                            onchange="previewFileHandler()"/>
+                        </div>
+                       
+                        </div>
+                        <div class="login_input" style="align-items:flex-end; margin-bottom: 25px;">
+                            <button type="submit" class="btn btn-primary" id="create_product">Apply Event</button>
+                          </div>
+                    </div>
+                 </div>
+                 
+                 
+                </form>
+
+
            </div> 
            </div>
         </div>
-
     </div>
     <script src="/alldealers.js"></script>
 </body>

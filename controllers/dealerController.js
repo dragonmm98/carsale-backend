@@ -176,9 +176,14 @@ dealerController.getChosenDealer = async (req,res) => {
             try {
                 console.log ("GET connect/getAllDealers");
                  const dealers = new Dealers();
+                 const product = new Product();
                  const dealers_data = await dealers.getDealersData();
-        
-                  res.render("all-dealers",{dealers_data: dealers_data}); 
+                 const event_data = await product.getAllEventsDataAdmin(res.locals.member);
+                   
+                  res.render("all-dealers",{
+                    dealers_data: dealers_data,
+                    event_data: event_data
+                });
         
             } catch (err) {
                 console.log (`ERROR, connect/logout, ${err.message}`);

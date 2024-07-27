@@ -4,6 +4,7 @@ const dealerController= require("./controllers/dealerController");
 const productController=require("./controllers/productController");
 const uploader_product = require("./utils/upload-multer")("products"); 
 const uploader_members = require("./utils/upload-multer")("members"); 
+const uploader_event = require ("./utils/upload-multer")("community");
 
 /**********************************
 *--------------BSSR EJS-----------*
@@ -30,9 +31,18 @@ router_bssr.post ("/products/create",
   uploader_product.array("product_images", 5),
    productController.addNewProduct);
 
+   router_bssr.post ("/event/create",
+  dealerController.validateAdmin,
+  uploader_event.single("event_image"),
+   productController.addNewEvent);
+
  router_bssr.post ("/products/edit/:id",
  dealerController.validateAuthDealer,
  productController.updateChosenProduct);
+
+ router_bssr.post ("/event/edit/:id",
+ dealerController.validateAdmin,
+ productController.updateChosenEvent);
 
 
 router_bssr.get ("/all-dealers", 

@@ -1,4 +1,3 @@
-
 const assert = require("assert");
 const Definer= require("../lib/mistake");
 const Product = require("../models/Product");
@@ -54,7 +53,7 @@ productController.addNewProduct = async (req,res) => {
 
         const html = `<script>
                     alert('new Product added successfully');
-                     window.location.replace('/dealers/products/menu');
+                     window.location.replace("/dealers/products/menu");
                     </script>`
                     res.end(html);
 
@@ -84,4 +83,51 @@ productController.updateChosenProduct = async (req,res) => {
 
 
 };
- 
+
+productController.updateChosenEvent = async (req,res) => {
+    try {
+        console.log ("POST: connect/updateChosenEvent");
+        const product  = new Product(); 
+        const id = req.params.id;
+        const result = await product.updateChosenEvent(
+            id,
+            req.body,
+            req.member._id);
+         await res.json({state: "success", data: result}); 
+    }   catch (err) {
+        console.log (`ERROR, connect/updateChosenEvent ${err.message}`);
+        res.json({state:"fail", message: err.message});
+        
+    }
+
+
+};
+
+/////Admin Event ??//////
+
+productController.addNewEvent = async (req,res) => {
+    try {
+        console.log ("POST: connect/addNewEvent");
+        
+        const product = new Product();
+        let data = req.body;
+        data.event_image = req.file.path.replace(/\\/g, "/");
+        
+        
+        const result = await product.addNewEventData(data,req.member);
+
+
+        const html = `<script>
+                    alert('new Event added successfully');
+                    window.location.replace("/dealers/all-dealers")
+                    </script>`
+                    res.end(html);
+
+                    // assert.ok(result,Definer.product_err1); // moved to model
+        
+    } catch (err) {
+        console.log (`ERROR, connect/addNewEvent ${err.message}`);
+        
+    }
+};
+
