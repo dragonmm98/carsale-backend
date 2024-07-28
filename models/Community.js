@@ -5,11 +5,12 @@ const assert =require("assert");
 const { shapeIntoMongooseObjectId, board_id_enums_list, lookup_auth_member_liked } = require("../lib/config");
 const View = require("./View");
 const Member = require("./Member");
-
+const EventModel = require ("../schema/eventModel")
 
 class Community {
     constructor () {
         this.boArticleModel=BoArticleModel;
+        this.eventModel=EventModel;
     }
      async createArticleData(member,data) {
         try {
@@ -113,6 +114,18 @@ async getChosenArticleData (member, art_id) {
     }
 }
 
+async getAllEventsData(event_status) {
+    try {
+        
+          const result = await this.eventModel.find({
+            event_status: event_status,
+        });
+        assert.ok(result,Definer.general_err1);
+        return result;
+    } catch (err) {
+        throw err;
+    }
+ }
 }
 
      module.exports = Community;

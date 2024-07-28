@@ -47,6 +47,19 @@ class Product {
             throw err;
         }
         }
+
+        async getSizeProductsData(data) {
+            try { 
+                const result = await this.productModel.find({
+                    product_size: data,
+                });
+    
+                assert.ok(result,Definer.general_err1);
+                return result;;
+        } catch (err) {
+            throw err;
+        }
+    }
       
     /****************Get CHosen Product  ***************/    
   async getChosenProductData (member, id) {
@@ -71,6 +84,7 @@ class Product {
         throw err;
     }
   }
+
 
 
      /**************BSSR RELATED STATIC METHODS ****************/

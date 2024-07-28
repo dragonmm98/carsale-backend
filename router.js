@@ -37,6 +37,10 @@ router.post ("/products",
 memberController.retrieveAuthMember,
  productController.getAllProducts);
 
+ router.get ("/filter",
+memberController.retrieveAuthMember,
+ productController.getSizeProducts);
+
 router.get ("/products/:id",
  memberController.retrieveAuthMember, 
 productController.getChosenProduct); 
@@ -80,6 +84,10 @@ communityController.createArticle);
 router.get ("/community/articles",
 memberController.retrieveAuthMember,
 communityController.getMemberArticles);
+
+router.get ("/community/events",
+memberController.retrieveAuthMember,
+communityController.getEvents);
 
 router.get ("/community/target", 
 memberController.retrieveAuthMember,

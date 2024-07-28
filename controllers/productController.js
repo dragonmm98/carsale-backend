@@ -17,6 +17,20 @@ productController.getAllProducts = async (req,res) => {
     }
 };
 
+productController.getSizeProducts = async (req,res) => {
+    try { 
+        console.log ("POST: connect/getSizeProducts");
+        const product = new Product();
+        console.log("reqbody", req.body.product_size)
+        const data = req.body.product_size
+        const result = await product.getSizeProductsData(data);
+        res.json({ state: "succeed", data: result });
+
+    } catch (err) {
+        console.log (`ERROR, cont/getSizeProducts ${err.message}`);
+        res.json ({state: "fail", message: err.message});
+    }
+};
 
 productController.getChosenProduct = async (req, res) => {
     try { 

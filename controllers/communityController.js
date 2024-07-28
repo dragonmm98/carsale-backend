@@ -67,6 +67,21 @@ communityController.getArticles = async (req,res) => {
     }
 }
 
+communityController.getEvents = async (req,res) => {
+    try {
+        console.log("connect/Events")
+        const community = new Community();
+        const event_status = "active"
+      
+    const result = await community.getAllEventsData(event_status);
+     res.json({state: "success", data: result});
+    } catch (err) {
+        console.log (`ERROR, cont/getEvents, ${err.message}`);
+        res.json({ state:"fail", message: err.message});
+
+    }
+}
+
 communityController.getChosenArticle = async (req,res) => {
     try {
         console.log("connect/getChosenArticle")
