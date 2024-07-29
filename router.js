@@ -37,7 +37,7 @@ router.post ("/products",
 memberController.retrieveAuthMember,
  productController.getAllProducts);
 
- router.get ("/filter",
+ router.post ("/filter",
 memberController.retrieveAuthMember,
  productController.getSizeProducts);
 

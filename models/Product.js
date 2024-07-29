@@ -49,17 +49,43 @@ class Product {
         }
 
         async getSizeProductsData(data) {
-            try { 
-                const result = await this.productModel.find({
-                    product_size: data,
-                });
-    
-                assert.ok(result,Definer.general_err1);
-                return result;;
-        } catch (err) {
-            throw err;
+            try {
+                // Initialize match and sort objects
+                let match = { product_status: "PROCESS" };
+                let sort = {};
+        
+                // Add product_size to the match criteria if available
+                if (data.product_size) {
+                    match["product_size"] = data.product_size;
+                    // Sort by product_size based on its value
+                    sort = { product_size: data.product_size === "ORDINARY" ? 1 : -1 };
+                } else {
+                    // Default sorting if product_size is not provided (e.g., ascending order)
+                    sort = { product_size: 1 };
+                }
+        
+                // Build the aggregate pipeline
+                const pipeline = [
+                    { $match: match },
+                    { $sort: sort },
+                    { $skip: (data.page - 1) * data.limit },
+                    { $limit: data.limit * 1 }
+                ];
+        
+                // Add the lookup for member liked products if auth_mb_id is available
+             
+        
+                // Execute the aggregate pipeline
+                const result = await this.productModel.aggregate(pipeline).exec();
+        
+                // Ensure the result is valid
+                assert.ok(result, Definer.general_err1);
+                return result;
+        
+            } catch (err) {
+                throw err;
+            }
         }
-    }
       
     /****************Get CHosen Product  ***************/    
   async getChosenProductData (member, id) {
