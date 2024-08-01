@@ -34,6 +34,23 @@ communityController.createArticle = async (req,res) => {
     }
 }
 
+communityController.createComment = async (req,res) => {
+    try {
+        console.log("connect/createComment")
+     
+
+     const community = new Community();
+     const result = await community.createCommentData(req.member,req.body);
+     assert.ok(result, Definer.general_err1);
+
+     
+     res.json({state: "success", data: result});
+    } catch (err) {
+        console.log (`ERROR, cont/createComment, ${err.message}`);
+        res.json({ state:"fail", message: err.message});
+    }
+}
+
 communityController.getMemberArticles = async (req,res) => {
     try {
         console.log("connect/getMemberArticles")

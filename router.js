@@ -97,7 +97,10 @@ router.get ("/community/single-article/:art_id",
 memberController.retrieveAuthMember,
 communityController.getChosenArticle)
 
-
+//comments
+router.post ("/comment/create", 
+memberController.retrieveAuthMember,
+communityController.createComment);
 
 // Following related Routers*****
 router.post ("/follow/subscribe",

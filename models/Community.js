@@ -5,12 +5,14 @@ const assert =require("assert");
 const { shapeIntoMongooseObjectId, board_id_enums_list, lookup_auth_member_liked } = require("../lib/config");
 const View = require("./View");
 const Member = require("./Member");
-const EventModel = require ("../schema/eventModel")
+const EventModel = require ("../schema/eventModel");
+const commnetModel = require("../schema/commnetModel");
 
 class Community {
     constructor () {
         this.boArticleModel=BoArticleModel;
         this.eventModel=EventModel;
+        this.commentModel=commnetModel;
     }
      async createArticleData(member,data) {
         try {
@@ -23,6 +25,7 @@ class Community {
             throw err;
         }
      }
+     
       
      async saveArticleData(data) {
         try {
@@ -32,7 +35,27 @@ class Community {
             throw new Error (Definer.auth_err1)
         }
      }
-   
+
+     async saveCommentData(data) {
+        try {
+         const comment = new this.commentModel(data);
+         return await comment.save();
+        } catch (mongo_err) {
+            throw new Error (Definer.auth_err1)
+        }
+     }
+
+     async createCommentData(member,data) {
+        try {
+        data.mb_id = shapeIntoMongooseObjectId(member._id);
+        const new_comment = await this.saveCommentData(data);
+        return new_comment;
+                                 
+
+            } catch (err){
+            throw err;
+        }
+     }
        
      async getMemberArticlesData (member, mbid, inquery, ) {
         try {
