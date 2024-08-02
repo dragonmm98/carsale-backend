@@ -89,6 +89,10 @@ router.get ("/community/events",
 memberController.retrieveAuthMember,
 communityController.getEvents);
 
+router.get ("/community/comments",
+memberController.retrieveAuthMember,
+communityController.getComment);
+
 router.get ("/community/target", 
 memberController.retrieveAuthMember,
 communityController.getArticles);

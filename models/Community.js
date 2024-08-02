@@ -149,6 +149,32 @@ async getAllEventsData(event_status) {
         throw err;
     }
  }
+ async getAllCommentData(query) {
+    try {
+        let matches = 
+        {comment_types: query.comment_types, comment_status: "active"};
+        query.limit *= 1;
+        query.page *= 1;
+
+
+        const result = await this.commentModel.aggregate([
+            {$match: {matches}},
+            {$sort: {createdAt: -1}},
+            {$skip: (query.page -1 )* query.limit},
+            {$limit: query.limit},
+            {$lookup: {
+                from:"members",
+                localField: "mb_id",
+                foreignField:"_id",
+                as: "members_data",
+            }}, {$unwind: "$members_data"},
+    
+        ]).exec();
+        assert.ok(result,Definer.general_err1);
+    } catch (err) {
+        throw err;
+    }
+ }
 }
 
      module.exports = Community;
