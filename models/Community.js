@@ -152,13 +152,16 @@ async getAllEventsData(event_status) {
  async getAllCommentData(query) {
     try {
         let matches = 
-        {comment_types: query.comment_types, comment_status: "active"};
-        query.limit *= 1;
-        query.page *= 1;
+        {
+            comment_types: query.comment_types,
+             comment_status: "active"};
+      
+              query.limit *= 1;
+              query.page *= 1;
 
 
         const result = await this.commentModel.aggregate([
-            {$match: {matches}},
+            {$match: matches},
             {$sort: {createdAt: -1}},
             {$skip: (query.page -1 )* query.limit},
             {$limit: query.limit},
@@ -171,6 +174,7 @@ async getAllEventsData(event_status) {
     
         ]).exec();
         assert.ok(result,Definer.general_err1);
+        return result;
     } catch (err) {
         throw err;
     }
