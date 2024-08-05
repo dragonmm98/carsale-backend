@@ -102,7 +102,6 @@ communityController.getComment = async (req,res) => {
     try {
         console.log("connect/Comments")
         const community = new Community();
-        console.log("queryyy-----",req.query)
       
     const result = await community.getAllCommentData(req.query);
      res.json({state: "success", data: result});

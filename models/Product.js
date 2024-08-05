@@ -48,44 +48,41 @@ class Product {
         }
         }
 
-        async getSizeProductsData(data) {
+        async getSizeProductsData(member, data) {
             try {
-                // Initialize match and sort objects
-                let match = { product_status: "PROCESS" };
-                let sort = {};
+                const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
         
-                // Add product_size to the match criteria if available
+                let match = { product_status: "PROCESS" };
+                if (data.dealers_mb_id) {
+                    match["dealers_mb_id"] = shapeIntoMongooseObjectId(data.dealers_mb_id);
+                }
                 if (data.product_size) {
                     match["product_size"] = data.product_size;
-                    // Sort by product_size based on its value
-                    sort = { product_size: data.product_size === "ORDINARY" ? 1 : -1 };
-                } else {
-                    // Default sorting if product_size is not provided (e.g., ascending order)
-                    sort = { product_size: 1 };
                 }
         
-                // Build the aggregate pipeline
+                const sort = data.order === "product_price" ? { [data.order]: 1 } : { [data.order]: -1 };
+        
                 const pipeline = [
                     { $match: match },
-                    { $sort: sort },
-                    { $skip: (data.page - 1) * data.limit },
-                    { $limit: data.limit * 1 }
+                    { $skip: (data.page * 1 - 1) * data.limit },
+                    { $limit: data.limit * 1 },
+                    lookup_auth_member_liked(auth_mb_id)
                 ];
         
-                // Add the lookup for member liked products if auth_mb_id is available
-             
+                // Only include the sort stage if product_size is an empty string
+                if (!data.product_size) {
+                    pipeline.splice(1, 0, { $sort: sort });
+                }
         
-                // Execute the aggregate pipeline
                 const result = await this.productModel.aggregate(pipeline).exec();
         
-                // Ensure the result is valid
                 assert.ok(result, Definer.general_err1);
                 return result;
-        
             } catch (err) {
                 throw err;
             }
         }
+        
       
     /****************Get CHosen Product  ***************/    
   async getChosenProductData (member, id) {
