@@ -22,7 +22,6 @@ productController.getSizeProducts = async (req,res) => {
         console.log ("POST: connect/getSizeProducts");
         const product = new Product();
         const member_id = req.member;
-        console.log("member_id", member_id)
         const result = await product.getSizeProductsData(member_id,req.body);
         res.json({ state: "succeed", data: result });
 
