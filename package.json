@@ -26,14 +26,12 @@
     "mongodb": "^3.2.6",
     "mongoose": "^6.2.10",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.0.1",
     "socket.io": "^2.5.0",
     "uuid": "^8.3.2"
   },
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dragonmm98/carsale-backend.git"
@@ -42,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/dragonmm98/carsale-backend/issues"
   },
-  "homepage": "https://github.com/dragonmm98/carsale-backend#readme"
+  "homepage": "https://github.com/dragonmm98/carsale-backend#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }
